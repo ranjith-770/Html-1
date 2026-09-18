@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanban Catering</title>
+
+    <!-- EmailJS Library Integration -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          // REPLACE WITH YOUR ACTUAL EMAILJS PUBLIC KEY FROM YOUR DASHBOARD
+          emailjs.init({
+            publicKey: "YOUR_PUBLIC_KEY",
+          });
+       })();
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9e804;
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #f9f7f6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d35400;
+        }
+
+        .phone-link {
+            color: #d35400;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .btn {
+            background-color: #d35400;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #e67e22;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1ebe57;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #f7f7f5;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Services & Menu */
+        .services, .menu-section {
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #d35400;
+        }
+
+        .filter-buttons {
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            margin: 0 5px;
+            border: 1px solid #d35400;
+            background: #fff;
+            color: #d35400;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #d35400;
+            color: #fff;
+        }
+
+        .menu-item {
+            display: block;
+        }
+
+        .menu-item.hide {
+            display: none;
+        }
+
+        /* Inquiry Form Section */
+        .contact {
+            background-color: #a378a7;
+            padding: 60px 50px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Status Alert Box */
+        .alert-box {
+            display: none;
+            padding: 15px;
+            background-color: #27ae60;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #2c3e50;
+            color: #f6f4f4;
+        }
+
+        footer a {
+            color: #a7f695;
+            text-decoration: none;
+        }
+
+        footer a.wa-footer {
+            color: #25D366;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="logo">Nanban Catering</div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#menu">Menu</a>
+            <a href="#quote">Request Quote</a>
+            <a href="tel:+919876543210" class="phone-link">📞 +91 98765 43210</a>
+        </nav>
+        <div>
+            <a href="#quote" class="btn">Get a Quote</a>
+            
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Unforgettable Flavors for Every Celebration</h1>
+        <p>From intimate weddings to corporate galas, we deliver fresh, beautifully presented cuisine customized to your event.</p>
+        <div class="hero-buttons">
+            <a href="#quote" class="btn">Book Your Event</a>
+            
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Wedding Catering</h3>
+                <p>Full-service plated dinners, buffet styles, and cocktail hour hors d'oeuvres designed for your special day.</p>
+            </div>
+            <div class="card">
+                <h3>Corporate Events</h3>
+                <p>Reliable, professional lunches, conferences, and gala dinners tailored for business needs.</p>
+            </div>
+            <div class="card">
+                <h3>Private Parties</h3>
+                <p>Custom menus, drop-off platters, or private chef services for birthday parties, anniversaries, and family gatherings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Menu Section -->
+    <section class="menu-section" id="menu">
+        <h2 class="section-title">Sample Menu Highlights</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Items</button>
+            <button class="filter-btn" data-filter="south">South Indian</button>
+            <button class="filter-btn" data-filter="north">North Indian</button>
+            <button class="filter-btn" data-filter="dessert">Desserts</button>
+        </div>
+
+        <div class="grid">
+            <div class="card menu-item south">
+                <h3>Traditional Feast (Elai Sapadu)</h3>
+                <p>Authentic South Indian meal served with Sambar, Rasam, Poriyal, and Payasam.</p>
+            </div>
+            <div class="card menu-item south">
+                <h3>Special Biryani</h3>
+                <p>Flavorful Seeraga Samba or Basmati Biryani cooked with traditional spices.</p>
+            </div>
+            <div class="card menu-item north">
+                <h3>Paneer Butter Masala & Naan</h3>
+                <p>Rich, creamy paneer gravy served with freshly baked garlic butter naan.</p>
+            </div>
+            <div class="card menu-item north">
+                <h3>Dal Makhani & Jeera Rice</h3>
+                <p>Slow-cooked black lentils in rich cream served alongside fragrant cumin rice.</p>
+            </div>
+            <div class="card menu-item dessert">
+                <h3>Gulab Jamun with Ice Cream</h3>
+                <p>Hot, syrup-soaked jamuns paired with cold vanilla ice cream.</p>
+            </div>
+            <div class="card menu-item dessert">
+                <h3>Elaneer Payasam</h3>
+                <p>Refreshing traditional dessert made with tender coconut pulp and milk.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Request Form Section -->
+    <section class="contact" id="quote">
+        <h2 class="section-title" style="text-align: center; color: white;">Request a Catering Quote</h2>
+        <div class="form-container">
+            
+            <div id="alert-box" class="alert-box"></div>
+
+            <form id="quote-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Event Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Estimated Guest Count</label>
+                    <input type="number" id="guests" name="guests" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-type">Event Type</label>
+                    <select id="event-type" name="event-type">
+                        <option value="wedding">Wedding</option>
+                        <option value="corporate">Corporate</option>
+                        <option value="party">Private Party</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="details">Additional Event Details / Dietary Requirements</label>
+                    <textarea id="details" name="details" rows="4"></textarea>
+                </div>
+                <button type="submit" id="submit-btn" class="btn" style="width: 100%; border: none; cursor: pointer;">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Nanban Catering. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            Call Us: <a href="tel:+919876543210">+91 98765 43210</a> | 
+            
+        </p>
+    </footer>
+
+    <!-- JavaScript Code -->
+    <script>
+        const quoteForm = document.getElementById('quote-form');
+        const alertBox = document.getElementById('alert-box');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Email Submission via EmailJS
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            submitBtn.innerText = 'Sending Request...';
+            submitBtn.disabled = true;
+
+            const templateParams = {
+                to_email: 'vranjith678@gmail.com', // Sends directly to your email
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                phone_number: document.getElementById('phone').value,
+                event_date: document.getElementById('date').value,
+                guest_count: document.getElementById('guests').value,
+                event_type: document.getElementById('event-type').value,
+                details: document.getElementById('details').value || 'None provided'
+            };
+
+            // REPLACE 'YOUR_SERVICE_ID' AND 'YOUR_TEMPLATE_ID' WITH YOUR ACTUAL KEYS FROM EMAILJS DASHBOARD
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    alertBox.innerText = `Thank you, ${templateParams.from_name}! Your quote request has been sent to vranjith678@gmail.com.`;
+                    alertBox.style.backgroundColor = '#27ae60';
+                    alertBox.style.display = 'block';
+
+                    quoteForm.reset();
+                }, function(error) {
+                    alertBox.innerText = 'Unable to send request. Please check your EmailJS setup.';
+                    alertBox.style.backgroundColor = '#e74c3c';
+                    alertBox.style.display = 'block';
+                    console.error('EmailJS Error:', error);
+                })
+                .finally(function() {
+                    submitBtn.innerText = 'Submit Request';
+                    submitBtn.disabled = false;
+
+                    setTimeout(() => {
+                        alertBox.style.display = 'none';
+                    }, 6000);
+                });
+        });
+
+        // Menu Filter Script
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                menuItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.classList.remove('hide');
+                    } else {
+                        item.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // Scroll Shadow Script
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
