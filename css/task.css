@@ -1,0 +1,152 @@
+/* *{
+    margin: 0;
+} */
+
+/* *{ 
+    background-color: rgb(194, 237, 223);
+ } */
+/* .card{  
+    
+    border-width: 5px;
+    border-style: solid;
+    border-color: black;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:5px;
+    margin-right:5px;
+    height: 350px;
+    width: 250px;
+ } */
+
+ /* body {
+background-color: #f4f4f4;
+color: #333;
+font-family: Arial, sans-serif;
+}
+.profile-card {
+background-color: #fff;
+color: #000;
+width: 300px;
+padding: 20px;
+margin: 50px auto;
+border: 2px solid #ddd;
+outline: 3px dashed #ffa500;
+}
+.profile-image {
+width: 500; /* Full width of card */
+/* height: 200; /* Maintain aspect ratio */
+/* border: 2px solid #000; 
+display: block;
+margin-bottom: 15px;
+}
+.profile-name {
+font-size: 24px;
+text-transform: uppercase;
+text-align: center;
+color: #0073e6;
+}
+.profile-title {
+font-size: 18px;
+text-align: center;
+font-style: italic;
+margin: 10px 0;
+}
+.profile-link {
+color: #ff4500;
+text-decoration: none;
+font-size: 16px;
+display: block;
+text-align: center;
+margin: 10px 0;
+}
+.profile-details {
+list-style: square;
+padding: 0;
+margin-top: 15px;
+}*/ 
+
+
+
+/* Border */
+/* .border{
+    border: 10px  solid blueviolet;
+    margin: 20px 10px 15px 5px;
+    padding: 10px 20px 5px 15px;
+    height: 100;
+    width: 150;
+} */
+
+
+/* Box Model */
+/* .Box{
+    height: 100px;
+    
+    background-color: yellow;
+}
+.Box h2{
+    padding-top: 35px;
+    padding-left: 20px;
+}
+.one{
+    border: 75px solid yellowgreen;
+} */
+
+     /* TEXT */
+
+/* p{
+    /* Text color */
+
+    /* color: yellow;
+    color: tomato;
+    color: palevioletred;
+    color:deeppink; */
+
+    /* Text Alignment */
+
+    /* text-align: left;
+    text-align: right;
+    text-align: center;
+    text-align: justify; */
+    
+    /* Text Decoration */
+
+    /* text-decoration: underline;
+    text-decoration: overline;
+    text-decoration: line-through;
+    text-decoration: none; */
+
+    /* Text Transformation */
+    
+    /* text-transform: capitalize;
+    text-transform: uppercase;
+    text-transform: lowercase;
+    text-transform: none; */
+
+    /* Text Spacing */
+
+    /* letter-spacing: 5px;
+    word-spacing: 3px; */
+
+    /* Text Shadow */
+
+    /* text-shadow: 1px 2px 2px red; */
+
+    /* Fonts */
+
+    /* Font Family */
+
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family:fantasy;
+    font-family: 'Times New Roman', Times, serif; */
+
+    /* Font Style */
+
+    /* font-style: italic;
+    font-style: oblique;
+    font-style: normal; */
+
+    /* Font Size */
+
+    /* font-size: 26px;
+} */ 
+
